@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@keyframes first {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+}
+.animate-first {
+  animation: first 30s infinite linear;
+}
+
+@keyframes second {
+  0%, 100% { transform: rotate(360deg) scale(1.2); }
+  50% { transform: rotate(180deg) scale(1); }
+}
+.animate-second {
+  animation: second 20s infinite linear;
+}
+
+@keyframes third {
+  0%, 100% { transform: rotate(0deg) scale(1.1); }
+  50% { transform: rotate(-180deg) scale(0.9); }
+}
+.animate-third {
+  animation: third 40s infinite linear;
+}
+
+@keyframes fourth {
+  0%, 100% { transform: rotate(270deg) scale(0.8); }
+  50% { transform: rotate(90deg) scale(1.3); }
+}
+.animate-fourth {
+  animation: fourth 35s infinite linear;
+}
+
+@keyframes fifth {
+  0%, 100% { transform: rotate(-270deg) scale(1.1); }
+  50% { transform: rotate(-90deg) scale(0.8); }
+}
+.animate-fifth {
+  animation: fifth 25s infinite linear;
+}
