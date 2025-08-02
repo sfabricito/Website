@@ -5,7 +5,12 @@ export default defineNuxtConfig({
 
   app: {
     baseURL: '/Website/', // GitHub Pages deployment path
-    buildAssetsDir: 'assets'
+    buildAssetsDir: '/_nuxt/',
+    cdnURL: '/Website/'
+  },
+
+  router: {
+    base: '/Website/'
   },
 
   future: {
@@ -14,6 +19,13 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
   css: ['@/assets/css/main.css'],
+
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
 
   vite: {
     plugins: []
@@ -45,7 +57,14 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'github-pages'
+    preset: 'github-pages',
+    prerender: {
+      routes: ['/404.html']
+    }
+  },
+
+  experimental: {
+    payloadExtraction: false
   },
 
   ssr: false // Enable SPA mode for GitHub Pages
