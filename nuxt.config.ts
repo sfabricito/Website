@@ -3,9 +3,10 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
 
-  // app: {
-  //   baseURL: '/Website/' // Only enable this for GitHub Pages deployment
-  // },
+  app: {
+    baseURL: '/Website/', // GitHub Pages deployment path
+    buildAssetsDir: 'assets'
+  },
 
   future: {
     compatibilityVersion: 4,
@@ -44,6 +45,8 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'static'
-  }
+    preset: 'github-pages'
+  },
+
+  ssr: false // Enable SPA mode for GitHub Pages
 })
