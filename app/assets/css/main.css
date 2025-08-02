@@ -1,4 +1,11 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
 
 @keyframes first {
   0%, 100% { transform: rotate(0deg) scale(1); }
