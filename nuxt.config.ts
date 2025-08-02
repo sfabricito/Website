@@ -4,13 +4,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
 
   app: {
-    baseURL: '/Website/', // GitHub Pages deployment path
+    baseURL: process.env.NUXT_APP_BASE_URL || '/Website/',
     buildAssetsDir: '/_nuxt/',
-    cdnURL: '/Website/'
-  },
-
-  router: {
-    base: '/Website/'
+    cdnURL: process.env.NUXT_APP_BASE_URL || '/Website/'
   },
 
   future: {
@@ -28,6 +24,7 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    base: process.env.NUXT_APP_BASE_URL || '/Website/',
     plugins: []
   },
 
@@ -57,10 +54,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'github-pages',
-    prerender: {
-      routes: ['/404.html']
-    }
+    preset: 'github-pages'
   },
 
   experimental: {
