@@ -1,25 +1,27 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
+
+  // app: {
+  //   baseURL: '/Website/' // Only enable this for GitHub Pages deployment
+  // },
 
   future: {
     compatibilityVersion: 4,
   },
 
   devtools: { enabled: true },
-  css: ['~/assets/css/main.css'],
+  css: ['@/assets/css/main.css'],
 
   vite: {
-    plugins: [
-      tailwindcss(),
-    ],
+    plugins: []
   },
 
   modules: [
     "@nuxt/eslint",
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
+    '@nuxtjs/tailwindcss'
   ],
 
   googleFonts: {
@@ -40,4 +42,8 @@ export default defineNuxtConfig({
       }
     }
   },
+
+  nitro: {
+    preset: 'static'
+  }
 })
