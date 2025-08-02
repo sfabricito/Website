@@ -2,15 +2,15 @@
 <template>
   <main class="relative">
     <!-- Navigation Bar with high z-index to stay above everything -->
-    <nav class="fixed top-0 left-0 right-0 z-50 p-4">
+    <nav class="fixed top-0 left-0 right-0 z-50 p-2 lg:p-4">
       <NavBar />
     </nav>
     
-    <!-- Scroll container to enable scrolling -->
-    <div class="h-[200vh]"></div>
+    <!-- Scroll container to enable scrolling - only on desktop -->
+    <div class="hidden lg:block lg:h-[200vh]"></div>
     
-    <!-- Hero Section - Full viewport height with scroll transition -->
-    <section ref="heroSection" class="hero-section flex flex-col items-center justify-center min-h-screen px-4 py-6 lg:py-12 mx-auto max-w-xl text-center relative transition-all duration-1000 ease-out">
+    <!-- Hero Section - Full viewport height with scroll transition on desktop, normal flow on mobile -->
+    <section ref="heroSection" class="hero-section flex flex-col items-center justify-center min-h-screen px-4 py-6 lg:py-12 mx-auto max-w-xl text-center relative transition-all duration-1000 ease-out lg:fixed lg:top-0 lg:left-0 lg:right-0 lg:z-10">
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 leading-tight">
         Fabricio Solís
       </h1>
@@ -46,8 +46,8 @@
       </div>
     </section>
 
-    <!-- About Section - Slides up to replace hero -->
-    <section ref="aboutSection" id="about" class="about-section h-screen px-4 pt-16 pb-8 mx-auto max-w-6xl transition-all duration-1000 ease-out fixed top-0 left-0 right-0 z-10 overflow-y-auto lg:overflow-hidden">
+    <!-- About Section - Slides up to replace hero on desktop, flows naturally on mobile -->
+    <section ref="aboutSection" id="about" class="about-section h-screen lg:fixed lg:top-0 lg:left-0 lg:right-0 lg:z-10 px-4 pt-16 lg:pt-16 pb-8 mx-auto max-w-6xl transition-all duration-1000 ease-out overflow-y-auto lg:overflow-hidden">
       
       <!-- Two Column Layout: Experience and Projects with individual scrolling -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-auto lg:h-[calc(100vh-8rem)] min-h-full">
@@ -339,12 +339,15 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.hero-section {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
+/* Desktop: Fixed positioning for scroll animations */
+@media (min-width: 1024px) {
+  .hero-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
 }
 
 .about-section {
@@ -444,16 +447,26 @@ onUnmounted(() => {
 
 /* Mobile-specific animations and layout adjustments */
 @media (max-width: 1024px) {
-  /* Mobile: Make about section relative and scrollable */
+  /* Mobile: Make hero section normal block element */
+  .hero-section {
+    position: relative !important;
+    transform: none !important;
+    opacity: 1 !important;
+    min-height: 100vh !important;
+    padding-top: 3rem !important; /* Reduced from 4rem */
+    padding-bottom: 2rem !important;
+  }
+  
+  /* Mobile: Make about section flow naturally after hero */
   .about-section {
     position: relative !important;
     transform: none !important;
     opacity: 1 !important;
-    margin-top: 0;
+    margin-top: 0 !important;
     height: auto !important;
     min-height: 100vh;
     overflow-y: visible !important;
-    padding-top: 6rem !important; /* Reduced from 4rem to minimize gap */
+    padding-top: 2rem !important;
   }
   
   /* Mobile: Show content immediately */
@@ -479,15 +492,7 @@ onUnmounted(() => {
     flex: none;
   }
   
-  /* Mobile: Hero section as normal block element */
-  .hero-section {
-    position: relative !important;
-    transform: none !important;
-    opacity: 1 !important;
-    padding-bottom: 2rem !important; /* Reduce gap between hero and about */
-  }
-  
-  /* Mobile: Reduce title margins */
+  /* Mobile: Reduce title margins for tighter spacing */
   .hero-section h1 {
     margin-bottom: 0.5rem !important;
   }
@@ -500,14 +505,7 @@ onUnmounted(() => {
     margin-bottom: 1.5rem !important;
   }
   
-  /* Mobile: Optimize hero section height */
-  .hero-section {
-    min-height: 80vh !important;
-    padding-top: 4rem !important;
-    padding-bottom: 1rem !important;
-  }
-  
-  /* Mobile: Hide scroll indicator on mobile */
+  /* Mobile: Hide scroll indicator */
   .hero-section .animate-bounce {
     display: none !important;
   }
